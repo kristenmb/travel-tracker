@@ -93,7 +93,9 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding-top: 2em
+  padding-top: 2em;
+  overflow: scroll;
+  height: 75vh;
 }
 
 .trip-cards {
@@ -101,5 +103,8 @@ h1 {
   width: 20vw;
   border: 2pt black solid;
   margin: 1.5em;
-  background-color: #636E6F;
+  background-color: rgba($color: #636E6F, $alpha: 0.5)
+  // #636E6F;
+  // 99 110 111
+  // background-opacity: 50%;
 }
