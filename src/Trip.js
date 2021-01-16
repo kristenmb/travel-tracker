@@ -12,6 +12,7 @@ class Trip {
     //         "image": "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
     //         "alt": "overview of city buildings with a clear sky"
     //     },
+    this.travelerCount = tripData.travelers;
     this.date = tripData.date;
     this.duration = tripData.duration;
     this.status = tripData.status;
@@ -22,9 +23,10 @@ class Trip {
   }
 
   estimatedTripCost() {
-    //daily cost of destination * duration
-    //flight cost * travelers
-    // * 10%
+    const totalLodging = this.destination.costPerDay * this.duration;
+    const totalFlight = this.destination.costPerFlight * this.travelerCount;
+    const tripCost = ((totalLodging + totalFlight) * .10).toFixed(2);
+    return tripCost;
   }
 
   findTripDuration() {
@@ -32,7 +34,6 @@ class Trip {
     let tripEnd = tripStart.setDate(tripStart.getDate() + this.duration);
     this.tripStartDate = tripStart.getTime();
     this.tripEndDate = tripEnd;
-    console.log(this.tripEndDate, 'end')
   }
 }
 export default Trip;
