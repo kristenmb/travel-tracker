@@ -12,6 +12,7 @@ let allTravelers;
 let allTrips;
 let allDestinations;
 let currentTraveler;
+let today;
 
 window.addEventListener('load', () => {
   apiCalls.fetchAllData()
@@ -19,24 +20,39 @@ window.addEventListener('load', () => {
       allTravelers = allData[0];
       allTrips = allData[1];
       allDestinations = allData[2];
+      getTodaysDate();
       createUser();
       createTrip();
       createDestination();
-      domUpdates.displayTrips(currentTraveler, allTrips)
+      currentTraveler.createAllTrips(allTrips, allDestinations);
+      currentTraveler.sortPresentTrips();
+      domUpdates.displayTrips(currentTraveler)
     })
 })
 
 function createUser() {
-  currentTraveler = new Traveler(allTravelers[0])
+  currentTraveler = new Traveler(allTravelers[0], today)
   // console.log(currentTraveler);
 }
 
 function createTrip() {
-  let aTrip = new Trip(allTrips[0]);
+  let aTrip = new Trip(allTrips[7]);
   console.log(aTrip)
 }
 
 function createDestination() {
-  let destination = new Destination(allDestinations[0])
+  let destination = new Destination(allDestinations[38])
   console.log(destination);
 }
+
+function getTodaysDate() {
+  let fullDate = new Date();
+  today = fullDate.getTime();
+  // fullDate.toDateString();
+}
+
+
+// set start month and end month
+// set start DAY and end DAY
+// if year matches && startmonth <= tripstartmonth <= endmonth && startday <= today <= endDay
+//  then push to present trips array
