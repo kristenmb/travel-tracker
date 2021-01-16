@@ -1,5 +1,7 @@
+import Trip from './Trip.js';
+
 class Traveler {
-  constructor(travelerData) {
+  constructor(travelerData, today) {
     this.id = travelerData.id;
     this.name = travelerData.name;
     this.type = travelerData.travelerType;
@@ -8,25 +10,51 @@ class Traveler {
     this.present = [];
     this.past = [];
     this.pending = [];
+    this.todaysDate = today;
   }
 
-  createAllTrips() {
-
-    //sort all trip data to filter out only the trips with matching userID
-    //add destination info
-    //instantiate Trips and push into allTrips array
+  createAllTrips(allTrips, allDestinations) {
+    let filteredTrips = allTrips.filter(trip => trip.userID === this.id);
+    let currentDestination;
+    filteredTrips.forEach(trip => {
+      allDestinations.forEach(location => {
+        if (trip.destinationID === location.id) {
+          currentDestination = location;
+          this.allTrips.push(new Trip(trip, currentDestination));
+        }
+      })
+    })
+    return this.allTrips
   }
 
   sortPresentTrips() {
-    // filter trips for any occurring today and push to this.present
+    this.allTrips.forEach(trip => {
+      trip.findTripDuration();
+      let tripEnd = trip.tripEndDate;
+      if (this.todaysDate < tripEnd) {
+        this.present.push(trip);
+      }
+    })
   }
 
   sortUpcomingTrips() {
-    //filter all upcoming trips and push to this.upcoming
+    this.allTrips.forEach(trip => {
+      trip.findTripDuration();
+      let tripStart = trip.tripStartDate;
+      if (this.todaysDate < tripStart) {
+        this.upcoming.push(trip)
+      }
+    })
   }
 
   sortPastTrips() { 
-    //filter all past trips and push to this.past
+    this.allTrips.forEach(trip => {
+      trip.findTripDuration();
+      let tripEnd = trip.tripEndDate;
+      if (tripEnd < this.todaysDate) {
+        this.past.push(trip)
+      }
+    })
   }
 
   calculateMoneySpentThisYear() {
