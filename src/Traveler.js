@@ -75,8 +75,8 @@ class Traveler {
 
   calculateMoneySpentThisYear() {
     let pastYearTrips = this.allTrips.filter(trip => {
-
-      let yearStart = this.todaysDate.setDate(this.todaysDate.getDate() - 365)
+      let today = new Date(this.todaysDate)
+      let yearStart = today.setDate(today.getDate() - 365)
       if (trip.tripStartDate > yearStart) {
         return trip;
       };
