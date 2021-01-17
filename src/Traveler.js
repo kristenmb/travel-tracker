@@ -27,6 +27,13 @@ class Traveler {
     return this.allTrips
   }
 
+  sortAllTrips() {
+    this.sortPresentTrips();
+    this.sortUpcomingTrips();
+    this.sortPastTrips();
+    this.sortPendingTrips();
+  }
+
   sortPresentTrips() {
     this.allTrips.forEach(trip => {
       trip.findTripDuration();
@@ -40,8 +47,9 @@ class Traveler {
   sortUpcomingTrips() {
     this.allTrips.forEach(trip => {
       trip.findTripDuration();
-      let tripStart = trip.tripStartDate;
-      if (this.todaysDate < tripStart) {
+      let tripEnd = trip.tripEndDate;
+      let tripStart = trip.date;
+      if (tripEnd < this.todaysDate < tripStart) {
         this.upcoming.push(trip)
       }
     })
@@ -57,8 +65,26 @@ class Traveler {
     })
   }
 
+  sortPendingTrips() {
+    let pendingTrips = this.allTrips.filter(trip => trip.status === 'pending');
+    pendingTrips.forEach(trip => {
+      this.pending.push(trip);
+    })
+  }
+
   calculateMoneySpentThisYear() {
-    //for each trip annualMoney += ((duration * cost per day) + (number of travelers * flightscost) * 10%)
+    let pastYearTrips = this.allTrips.filter(trip => {
+
+      let yearStart = this.todaysDate.setDate(this.todaysDate.getDate() - 365)
+      if (trip.tripStartDate > yearStart) {
+        return trip;
+      };
+    });
+    return pastYearTrips.reduce((annualSpent, trip) => {
+      trip.estimatedTripCost();
+      annualSpent += trip.tripCost;
+      return annualSpent;
+    }, 0)
   }
 }
 
