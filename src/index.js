@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
 })
 
 function createUser() {
-  currentTraveler = new Traveler(allTravelers[35], today)
+  currentTraveler = new Traveler(allTravelers[0], today)
   // console.log(currentTraveler);
 }
 
