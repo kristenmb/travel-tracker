@@ -18,7 +18,7 @@ class Trip {
     const totalLodging = this.destination.estimatedLodgingCostPerDay * this.duration;
     const totalFlight = this.destination.estimatedFlightCostPerPerson * this.travelerCount;
     const tripCost = totalLodging + totalFlight;
-    const costWithAgentFee = tripCost * .10;
+    const costWithAgentFee = tripCost + (tripCost * .10);
     this.tripCost = costWithAgentFee;
     return costWithAgentFee;
   }
