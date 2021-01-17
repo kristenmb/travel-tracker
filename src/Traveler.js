@@ -35,11 +35,16 @@ class Traveler {
   }
 
   sortPresentTrips() {
+    console.log(this.allTrips, 'ALL TRIPS')
     this.allTrips.forEach(trip => {
       trip.findTripDuration();
       let tripEnd = trip.tripEndDate;
+      console.log(tripEnd)
       let tripStart = trip.tripStartDate;
-      if (tripStart < this.todaysDate && this.todaysDate < tripEnd) {
+      console.log(tripStart)
+      let today = new Date(this.todaysDate).getTime();
+      console.log(new Date(this.todaysDate).getTime())
+      if (tripStart < today < tripEnd) {
         console.log('in here')
         this.present.push(trip);
       }
@@ -50,7 +55,9 @@ class Traveler {
     this.allTrips.forEach(trip => {
       trip.findTripDuration();
       let tripStart = trip.tripStartDate;
-      if (this.todaysDate < tripStart) {
+      let tripEnd = trip.tripEndDate;
+
+      if (tripEnd < this.todaysDate < tripStart && !this.present.includes(trip)) {
         this.upcoming.push(trip)
       }
     })
