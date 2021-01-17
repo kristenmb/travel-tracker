@@ -4,7 +4,6 @@ import './images/turing-logo.png';
 
 import Traveler from './Traveler.js';
 import Trip from './Trip.js';
-import Destination from './Destination.js';
 import domUpdates from './domUpdates.js';
 import apiCalls from './apiCalls.js'
 
@@ -13,7 +12,9 @@ let allTrips;
 let allDestinations;
 let currentTraveler;
 let today;
+const tripButtons = document.querySelectorAll('.trip-btns');
 
+tripButtons.forEach(button => button.addEventListener('click', displayTrips))
 window.addEventListener('load', () => {
   apiCalls.fetchAllData()
     .then(allData => {
@@ -22,37 +23,40 @@ window.addEventListener('load', () => {
       allDestinations = allData[2];
       getTodaysDate();
       createUser();
-      createTrip();
-      createDestination();
       currentTraveler.createAllTrips(allTrips, allDestinations);
-      currentTraveler.sortPresentTrips();
-      domUpdates.displayTrips(currentTraveler)
+      currentTraveler.sortAllTrips();
+      domUpdates.displayTrips(currentTraveler, 'upcoming')
+      console.log(currentTraveler.todaysDate)
+      console.log(currentTraveler.past, 'PAST')
+      console.log(currentTraveler.present, 'PRESENT')
+      console.log(currentTraveler.upcoming, 'UPCOMING')
+      console.log(currentTraveler.pending, 'PENDING')
+
     })
 })
 
 function createUser() {
-  currentTraveler = new Traveler(allTravelers[0], today)
+  currentTraveler = new Traveler(allTravelers[35], today)
   // console.log(currentTraveler);
 }
 
-function createTrip() {
-  let aTrip = new Trip(allTrips[7]);
-  console.log(aTrip)
-}
-
-function createDestination() {
-  let destination = new Destination(allDestinations[38])
-  console.log(destination);
-}
-
 function getTodaysDate() {
-  let fullDate = new Date();
-  today = fullDate.getTime();
-  // fullDate.toDateString();
+  today = new Date()
 }
+// function createTrip() {
+//   let aTrip = new Trip(allTrips[7], createDestination());
+//   console.log(aTrip)
+//   aTrip.estimatedTripCost();
+// }
 
+// function createDestination() {
+//   let destination;
+//   allDestinations.forEach(location => {
+//     destination = new Destination(location);
 
-// set start month and end month
-// set start DAY and end DAY
-// if year matches && startmonth <= tripstartmonth <= endmonth && startday <= today <= endDay
-//  then push to present trips array
+//   })
+//   return destination;
+// }
+function displayTrips(event) {
+  domUpdates.displayTrips(currentTraveler, event.target.id)
+}
