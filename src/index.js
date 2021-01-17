@@ -31,7 +31,8 @@ window.addEventListener('load', () => {
       console.log(currentTraveler.present, 'PRESENT')
       console.log(currentTraveler.upcoming, 'UPCOMING')
       console.log(currentTraveler.pending, 'PENDING')
-
+      // console.log(currentTraveler.calculateMoneySpentThisYear(), 'LOOK')
+      domUpdates.displaySpending(currentTraveler.calculateMoneySpentThisYear())
     })
 })
 

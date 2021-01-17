@@ -25,10 +25,9 @@ const domUpdates = {
     tripCards.insertAdjacentHTML('beforeend', tripInfo)
   },
 
-  displayTripsOnClick() {
-    // if (event.target.id === "upcoming") {
-    //   this.displayTrips(c)
-    // }
+  displaySpending(cost) {
+    const annualSpending = document.querySelector('#spending');
+    annualSpending.innerText = `Total spent this year: $${cost}`
   }
 }
 
