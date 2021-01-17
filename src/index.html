@@ -12,7 +12,7 @@
       </div>
       <div class="right">
       <button>Log Out</button>
-       <h2>Total Spent this year: $$</h2>  
+       <h2 id="spending">Total Spent this year: $$</h2>  
       </div>
     </header>
   <section class="adventure">
@@ -20,7 +20,7 @@
     <div class="booking">
       <label for="start">Start date:</label>
       <input type="date" id="start" name="trip-start"
-       value="2018-07-22"
+       value=`${Date.now()}`
        min="2018-01-01" max="2018-12-31">
       <select>
         <optgroup label="Duration"></optgroup>
@@ -37,18 +37,12 @@
   </section>
   <section class="trips">
     <div class="tabs">
-      <button class="trip-btns">Upcoming Trips</button>
-      <button class="trip-btns">Current Trips</button>
-      <button class="trip-btns">Pending Trips</button>
-      <button class="trip-btns">Past Trips</button>
+      <button class="trip-btns" id="upcoming">Upcoming Trips</button>
+      <button class="trip-btns" id="present">Current Trips</button>
+      <button class="trip-btns" id="pending">Pending Trips</button>
+      <button class="trip-btns" id="past">Past Trips</button>
     </div>
-    <div class="card-container">
-      <article class="trip-cards">trip</article>
-      <article class="trip-cards">trip</article>
-      <article class="trip-cards">trip</article>
-      <article class="trip-cards">trip</article>
-      <article class="trip-cards">trip</article>
-    </div>
+    <div class="card-container"></div>
   </section>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
