@@ -1,5 +1,3 @@
-import Destination from './Destination.js';
-
 class Trip {
   constructor(tripData, destinationData) {
     this.id = tripData.id;
