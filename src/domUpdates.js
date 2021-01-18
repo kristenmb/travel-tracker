@@ -1,4 +1,11 @@
 const domUpdates = {
+  displayUserName(currentUser) {
+    const welcomeMessage = document.querySelector('.greeting');
+    const fullName = currentUser.name.split(' ');
+    const name = fullName[0]
+    welcomeMessage.innerText = `Welcome, ${name}`
+  },
+
   displayTrips(currentUser, displayType) {
     const tripCards = document.querySelector('.card-container');
     tripCards.innerHTML = '';
@@ -10,9 +17,10 @@ const domUpdates = {
         const formattedDate = this.formatDate(trip.date);
         tripInfo += `
         <article class="trip-cards">
-       
+        <div class="img-wrap">
         <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}>
-        <h4>${trip.destination.destination}</h4>
+        </div>
+        <h4 class="destination-name">${trip.destination.destination}</h4>
         <p>Trip date: ${formattedDate} <br>
         Travelers: ${trip.travelerCount} <br>
         Duration: ${trip.duration} <br>
