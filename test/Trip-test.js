@@ -59,6 +59,13 @@ describe('Traveler', () => {
     }); 
   })
 
-  
+  it('should be able to calculate the estimated trip cost', () => {
+    trip.estimatedTripCost();
+    expect(trip.tripCost).to.equal(1692.9)
 
+    trip2.estimatedTripCost();
+    expect(trip2.tripCost).to.equal(2596)    
+  })
+
+  
 })
