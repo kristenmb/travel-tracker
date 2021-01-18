@@ -25,6 +25,7 @@ function fetchAllInfo() {
       allDestinations = allData[2];
       getTodaysDate();
       createUser();
+      domUpdates.displayUserName(currentTraveler);
       currentTraveler.createAllTrips(allTrips, allDestinations);
       currentTraveler.sortAllTrips();
       domUpdates.displayTrips(currentTraveler, 'upcoming');
