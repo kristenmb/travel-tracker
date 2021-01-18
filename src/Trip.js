@@ -25,7 +25,7 @@ class Trip {
 
   findTripDuration() {
     let tripStart = new Date(this.date);
-    let tripEnd = tripStart.setDate(tripStart.getDate() + this.duration);
+    let tripEnd = new Date(this.date).setDate(new Date(this.date).getDate() + this.duration);
     this.tripStartDate = tripStart.getTime();
     this.tripEndDate = tripEnd;
   }
