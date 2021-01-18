@@ -55,6 +55,7 @@ const domUpdates = {
     numTravelers.value = '';
     destination.value = 0;
     button.classList.remove('book');
+    message.innerText = 'Please select appropriate inputs!'
     message.classList.add('hidden');
   }
 }
