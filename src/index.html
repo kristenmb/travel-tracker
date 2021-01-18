@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="#">
     <meta name="authors" content="Kristen Bair">
     <meta name="description" content="Mod 2 - Final Project - Travel Tracker">
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Adventure Tracker</title>
     <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
@@ -11,11 +12,11 @@
   <body>
     <header>
       <div class="left">
-        <h1>Welcome, User</h1>
+        <h1 class="greeting">Welcome, User</h1>
         <h2>Let's plan an adventure!</h2>  
       </div>
       <div class="right">
-      <button>Log Out</button>
+      <button class="logout small-btn">Log Out</button>
        <h2 id="spending">Total Spent this year: $$</h2>  
       </div>
     </header>
@@ -39,7 +40,7 @@
       </label>
     </div>
     <h4 class="selection-err hidden">Please select appropriate inputs!</h4>
-    <button class="book-btn" aria-disabled="true">Calculate Estimated Cost</button>
+    <button class="book-btn small-btn" aria-disabled="true">Calculate Estimated Cost</button>
   </section>
   <section class="trips">
     <div class="tabs">
