@@ -1,6 +1,6 @@
 import './css/base.scss';
 
-import './images/turing-logo.png';
+import './images/travel.png';
 
 import Traveler from './Traveler.js';
 import Trip from './Trip.js';
@@ -42,7 +42,6 @@ function fetchAllInfo() {
 
 function createUser() {
   currentTraveler = new Traveler(allTravelers[35], today)
-  // console.log(currentTraveler);
 }
 
 function getTodaysDate() {
@@ -51,6 +50,7 @@ function getTodaysDate() {
 
 function displayTrips(event) {
   domUpdates.displayTrips(currentTraveler, event.target.id);
+  domUpdates.displayTripSection(event.target.id)
   // apiCalls.deleteTrip(201);
 }
 
