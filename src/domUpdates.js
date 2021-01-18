@@ -1,14 +1,3 @@
-const startDateInput = document.querySelector('#start');
-const durationInput = document.querySelector('.duration');
-const numTravelersInput = document.querySelector('.num-travelers');
-const destinationInput = document.querySelector('.drop');
-const estimatedCostButton = document.querySelector('.book-btn');
-
-// startDateInput.addEventListener('click', domUpdates.estimateTripCost);
-
-
-
-
 const domUpdates = {
   displayTrips(currentUser, displayType) {
     const tripCards = document.querySelector('.card-container');
@@ -42,10 +31,9 @@ const domUpdates = {
   },
 
   createBookingSection(today, allDestinations) {
-    console.log(allDestinations[0]);
-    //sort alphebetically?
+    //sort alphabetically?
     const dropDown = document.querySelector('#destination-drop');
-    let destinations = ''
+    let destinations = '';
     allDestinations.forEach((destination, i) => {
         destinations += `<option value="${destination.id}">${destination.destination}</option>`
     })
@@ -61,17 +49,11 @@ const domUpdates = {
     }
   },
   
-  resetBookingArea(startDateInput, durationInput, numTravelersInput, destinationInput) {
-//     const startDateInput = document.querySelector('#start');
-// const durationInput = document.querySelector('.duration');
-// const numTravelersInput = document.querySelector('.num-travelers');
-// const destinationInput = document.querySelector('.drop');
-// const estimatedCostButton = document.querySelector('.book-btn');
-    startDateInput.value = '';
-    console.log(durationInput.value)
-    durationInput.value = '';
-    numTravelersInput.value = '';
-    destinationInput.value = ''
+  resetBookingArea(start, duration, numTravelers, destination) {
+    start.value = '';
+    duration.value = '';
+    numTravelers.value = '';
+    destination.value = ''
   }
 }
 
