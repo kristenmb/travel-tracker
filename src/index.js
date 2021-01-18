@@ -45,6 +45,36 @@ function createUser() {
 function getTodaysDate() {
   today = new Date()
 }
+
+function displayTrips(event) {
+  domUpdates.displayTrips(currentTraveler, event.target.id)
+}
+
+const bookingButton = document.querySelector('.book-btn');
+const startDateInput = document.querySelector('#start');
+const durationInput = document.querySelector('.trip-duration');
+const numTravelersInput = document.querySelector('.num-travelers');
+const destinationInput = document.querySelector('.drop');
+const selectionError = document.querySelector('.selection-err');
+
+bookingButton.addEventListener('click', (event) => {
+  if (startDateInput.value === '' || durationInput === '' || numTravelersInput === '' || destinationInput.value === ' ') {
+    //fix conditional so if date is selected still can't fire button
+    selectionError.classList.remove('hidden')
+  } else if (!event.target.classList.contains('book')) {
+    selectionError.innerText = `This trip will cost $$`
+    bookingButton.classList.toggle('book');
+    domUpdates.changeBookTripButton();
+  } else {
+    bookingButton.classList.toggle('book');
+    domUpdates.changeBookTripButton();
+    domUpdates.resetBookingArea(startDateInput, durationInput, numTravelersInput, destinationInput);
+    // const value = parseInt(durationInput.value)
+    //post it!
+  }
+
+})
+
 // function createTrip() {
 //   let aTrip = new Trip(allTrips[7], createDestination());
 //   console.log(aTrip)
@@ -59,36 +89,3 @@ function getTodaysDate() {
 //   })
 //   return destination;
 // }
-function displayTrips(event) {
-  domUpdates.displayTrips(currentTraveler, event.target.id)
-}
-
-const estimatedCostButton = document.querySelector('.book-btn');
-const startDateInput = document.querySelector('#start');
-const durationInput = document.querySelector('.trip-duration');
-const numTravelersInput = document.querySelector('.num-travelers');
-const destinationInput = document.querySelector('.drop');
-const selectionError = document.querySelector('.selection-err');
-
-estimatedCostButton.addEventListener('click', (event) => {
-  
-  if (startDateInput.value === '' || durationInput === '' || numTravelersInput === '' || destinationInput.value === ' ') {
-    selectionError.classList.remove('hidden')
-  } else if (!event.target.classList.contains('book')) {
-    selectionError.innerText = `This trip will cost $$`
-    estimatedCostButton.classList.toggle('book');
-    domUpdates.changeBookTripButton();
-  } else {
-    estimatedCostButton.classList.toggle('book');
-    domUpdates.changeBookTripButton();
-    startDateInput.value = '';
-    durationInput.value = '';
-    numTravelersInput.value = '';
-    destinationInput.value = ''
-    // domUpdates.resetBookingArea(startDateInput, durationInput, numTravelersInput, destinationInput);
-    // const value = parseInt(durationInput.value)
-    //post it!
-  }
-
-})
-
