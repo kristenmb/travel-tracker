@@ -1,3 +1,7 @@
+import domUpdates from './domUpdates.js';
+import Trip from './Trip.js'
+// import domUpdates from './domUpdates.js'
+
 const apiCalls = {
   getAllTravelers() {
     return fetch('http://localhost:3001/api/v1/travelers')
@@ -38,9 +42,41 @@ const apiCalls = {
       })
       .catch(err => {
         console.log(err);
-        alert('Page failed to load, please try again later.')
       })   
-  }
+  },
+
+  postNewTrip(newestTrip, currentTraveler, allDestinations) {
+    return fetch('http://localhost:3001/api/v1/trips', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newestTrip), 
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data, 'DATA')
+        console.log(data.newTrip, 'NEW RESOURCE')
+
+        let requestedTrip = data.newTrip;
+        let tripDestination = allDestinations.find(destination => {
+          return destination.id === requestedTrip.destinationID;
+        })
+        requestedTrip = new Trip(requestedTrip, tripDestination)
+        currentTraveler.sortAllTrips();
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  },
+
+  // deleteTrip(id) {
+  //   return fetch(`http://localhost:3001/api/v1/trips/${id}`, {
+  //     method: 'DELETE',
+  //   })
+  //   .then(response => response.json())
+  //   .then(info => console.log(info))
+  // }
 }
 
 export default apiCalls;

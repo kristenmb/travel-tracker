@@ -24,7 +24,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  color: white;
+  color: black;
 }
 
 .left {
@@ -82,7 +82,7 @@ h1 {
   font-size: 16pt;
   background-color: #FF8768;
   /*     #5A251C; */
-  color: white;
+  color: black;
 }
 
 .book-btn {
@@ -107,4 +107,12 @@ h1 {
   // #636E6F;
   // 99 110 111
   // background-opacity: 50%;
+}
+
+label {
+  color: white;
+}
+
+.hidden {
+  display: none;
 }

@@ -28,6 +28,35 @@ const domUpdates = {
   displaySpending(cost) {
     const annualSpending = document.querySelector('#spending');
     annualSpending.innerText = `Total spent this year: $${cost}`
+  },
+
+  createBookingSection(today, allDestinations) {
+    //sort alphabetically?
+    const dropDown = document.querySelector('#destination-drop');
+    let destinations = '';
+    allDestinations.forEach((destination, i) => {
+        destinations += `<option value="${destination.id}">${destination.destination}</option>`
+    })
+    dropDown.insertAdjacentHTML('beforeend', destinations)
+  },
+
+  changeBookTripButton(button) {
+    // const estimatedCostButton = document.querySelector('.book-btn');
+    if (button.classList.contains('book')) {
+      button.innerText = 'Book It!'
+    } else {
+      button.innerText = 'Calculate Estimated Cost'
+    }
+  },
+  
+  resetBookingArea(start, duration, numTravelers, destination, button, message) {
+    start.value = '';
+    duration.value = '';
+    numTravelers.value = '';
+    destination.value = 0;
+    button.classList.remove('book');
+    message.innerText = 'Please select appropriate inputs!'
+    message.classList.add('hidden');
   }
 }
 
