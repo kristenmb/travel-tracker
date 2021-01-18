@@ -1,8 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
-import Traveler from '../src/Traveler.js'
 import Trip from '../src/Trip.js';
-import travelerData from './test-data/traveler-test-data.js';
 import tripData from './test-data/trip-test-data.js';
 import destinationData from './test-data/destination-test-data.js'
 
@@ -61,10 +59,10 @@ describe('Traveler', () => {
 
   it('should be able to calculate the estimated trip cost', () => {
     trip.estimatedTripCost();
-    expect(trip.tripCost).to.equal(1692.9)
+    expect(trip.tripCost).to.equal(1692.9);
 
     trip2.estimatedTripCost();
-    expect(trip2.tripCost).to.equal(2596)    
+    expect(trip2.tripCost).to.equal(2596);
   })
 
   it('should be able to find the trips end and start date', () => {
