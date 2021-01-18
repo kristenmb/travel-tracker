@@ -1,0 +1,25 @@
+header {
+  border: 2pt black solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: black;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 20vh;
+}
+
+.logout {
+  font-size: medium;
+  align-self: flex-end;
+}

@@ -1,0 +1,21 @@
+.adventure {
+  border: 2px black solid;
+  display: flex;
+  height: 25vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: $secondary-background;
+}
+
+.booking {
+  display: flex;
+  width: 70vw;
+  justify-content: space-evenly;
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  color: $white;
+}
