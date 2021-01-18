@@ -1,3 +1,14 @@
+const startDateInput = document.querySelector('#start');
+const durationInput = document.querySelector('.duration');
+const numTravelersInput = document.querySelector('.num-travelers');
+const destinationInput = document.querySelector('.drop');
+const estimatedCostButton = document.querySelector('.book-btn');
+
+// startDateInput.addEventListener('click', domUpdates.estimateTripCost);
+
+
+
+
 const domUpdates = {
   displayTrips(currentUser, displayType) {
     const tripCards = document.querySelector('.card-container');
@@ -28,6 +39,39 @@ const domUpdates = {
   displaySpending(cost) {
     const annualSpending = document.querySelector('#spending');
     annualSpending.innerText = `Total spent this year: $${cost}`
+  },
+
+  createBookingSection(today, allDestinations) {
+    console.log(allDestinations[0]);
+    //sort alphebetically?
+    const dropDown = document.querySelector('#destination-drop');
+    let destinations = ''
+    allDestinations.forEach((destination, i) => {
+        destinations += `<option value="${destination.id}">${destination.destination}</option>`
+    })
+    dropDown.insertAdjacentHTML('beforeend', destinations)
+  },
+
+  changeBookTripButton() {
+    const estimatedCostButton = document.querySelector('.book-btn');
+    if (estimatedCostButton.classList.contains('book')) {
+      estimatedCostButton.innerText = 'Book It!'
+    } else {
+      estimatedCostButton.innerText = 'Calculate Estimated Cost'
+    }
+  },
+  
+  resetBookingArea(startDateInput, durationInput, numTravelersInput, destinationInput) {
+//     const startDateInput = document.querySelector('#start');
+// const durationInput = document.querySelector('.duration');
+// const numTravelersInput = document.querySelector('.num-travelers');
+// const destinationInput = document.querySelector('.drop');
+// const estimatedCostButton = document.querySelector('.book-btn');
+    startDateInput.value = '';
+    console.log(durationInput.value)
+    durationInput.value = '';
+    numTravelersInput.value = '';
+    destinationInput.value = ''
   }
 }
 
