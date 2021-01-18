@@ -40,20 +40,22 @@ const domUpdates = {
     dropDown.insertAdjacentHTML('beforeend', destinations)
   },
 
-  changeBookTripButton() {
-    const estimatedCostButton = document.querySelector('.book-btn');
-    if (estimatedCostButton.classList.contains('book')) {
-      estimatedCostButton.innerText = 'Book It!'
+  changeBookTripButton(button) {
+    // const estimatedCostButton = document.querySelector('.book-btn');
+    if (button.classList.contains('book')) {
+      button.innerText = 'Book It!'
     } else {
-      estimatedCostButton.innerText = 'Calculate Estimated Cost'
+      button.innerText = 'Calculate Estimated Cost'
     }
   },
   
-  resetBookingArea(start, duration, numTravelers, destination) {
+  resetBookingArea(start, duration, numTravelers, destination, button, message) {
     start.value = '';
     duration.value = '';
     numTravelers.value = '';
-    destination.value = ''
+    destination.value = 0;
+    button.classList.remove('book');
+    message.classList.add('hidden');
   }
 }
 
