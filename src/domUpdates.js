@@ -6,13 +6,19 @@ const domUpdates = {
     if (currentUser[displayType].length > 0) {
 
       currentUser[displayType].forEach(trip => {
+        console.log(trip.destination.image)
+        const formattedDate = this.formatDate(trip.date);
         tripInfo += `
         <article class="trip-cards">
-        <p>${displayType}</p> <br>
-        <p>Date: ${trip.date}</p> <br>
-        <p>Duration: ${trip.duration}</p> <br>
-        <p>Status: ${trip.status}</p> <br>
-        <p>Activities: ${trip.suggestedActivities}</p>
+       
+        <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}>
+        <h4>${trip.destination.destination}</h4>
+        <p>Trip date: ${formattedDate} <br>
+        Travelers: ${trip.travelerCount} <br>
+        Duration: ${trip.duration} <br>
+        Status: ${trip.status} <br> </p>
+        <a disabled href="">Request activities from your travel agent!</a>
+        
         </article>
         `;
       })
@@ -23,6 +29,11 @@ const domUpdates = {
     }
     
     tripCards.insertAdjacentHTML('beforeend', tripInfo)
+  },
+
+  formatDate(date) {
+    let fullDate = new Date(date).toDateString();
+    return fullDate;
   },
 
   displaySpending(cost) {
