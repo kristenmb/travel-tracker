@@ -15,7 +15,9 @@ let today;
 const tripButtons = document.querySelectorAll('.trip-btns');
 
 tripButtons.forEach(button => button.addEventListener('click', displayTrips))
-window.addEventListener('load', () => {
+window.addEventListener('load', fetchAllInfo)
+
+function fetchAllInfo() {
   apiCalls.fetchAllData()
     .then(allData => {
       allTravelers = allData[0];
@@ -35,10 +37,10 @@ window.addEventListener('load', () => {
       // console.log(currentTraveler.calculateMoneySpentThisYear(), 'LOOK')
       domUpdates.displaySpending(currentTraveler.calculateMoneySpentThisYear())
     })
-})
+}
 
 function createUser() {
-  currentTraveler = new Traveler(allTravelers[0], today)
+  currentTraveler = new Traveler(allTravelers[35], today)
   // console.log(currentTraveler);
 }
 
@@ -47,7 +49,8 @@ function getTodaysDate() {
 }
 
 function displayTrips(event) {
-  domUpdates.displayTrips(currentTraveler, event.target.id)
+  domUpdates.displayTrips(currentTraveler, event.target.id);
+  // apiCalls.deleteTrip(201);
 }
 
 const bookingButton = document.querySelector('.book-btn');
@@ -57,12 +60,14 @@ const numTravelersInput = document.querySelector('.num-travelers');
 const destinationInput = document.querySelector('.drop');
 const selectionError = document.querySelector('.selection-err');
 
-bookingButton.addEventListener('click', (event) => {
+bookingButton.addEventListener('click', handleBookings);
+
+function handleBookings(event) {
   if (startDateInput.value === '' || durationInput === '' || numTravelersInput === '' || destinationInput.value <= 0) {
     selectionError.classList.remove('hidden')
   } else if (!event.target.classList.contains('book')) {
     selectionError.classList.remove('hidden')
-    selectionError.innerText = `This trip will cost $$`
+    selectionError.innerText = `This trip will cost $${estimateNewTripCost()}`
     bookingButton.classList.add('book');
     domUpdates.changeBookTripButton(bookingButton);
   } else {
@@ -72,21 +77,33 @@ bookingButton.addEventListener('click', (event) => {
     // const value = parseInt(durationInput.value)
     //post it!
   }
+}
 
-})
+function estimateNewTripCost() {
+  let trip = collectBookingData();
+  let myDestination = allDestinations.find(destination => {
+    return destination.id === trip.destinationID;
+  })
+  let pendingTrip = new Trip (trip, myDestination);
+  return pendingTrip.estimatedTripCost();
+}
 
 function sendBookingRequest() {
   const newTrip = collectBookingData();
-  console.log(newTrip)
+  apiCalls.postNewTrip(newTrip, currentTraveler, allDestinations)
+    .then(res => {
+      fetchAllInfo()
+    });
 }
 
 function collectBookingData() {
   let duration = parseInt(durationInput.value);
   let travelers = parseInt(numTravelersInput.value);
+  let destinationID = parseInt(destinationInput.value);
   return {
     id: getID(),
     userID: currentTraveler.id,
-    destinationID: destinationInput.value,
+    destinationID,
     travelers,
     date: formatDateInput(),
     duration,
