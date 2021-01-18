@@ -18,22 +18,24 @@
   <section class="adventure">
     <h3>BOOK A NEW ADVENTURE</h3>
     <div class="booking">
-      <label for="start">Start date:</label>
-      <input type="date" id="start" name="trip-start"
-       value=`${Date.now()}`
-       min="2018-01-01" max="2018-12-31">
-      <select>
-        <optgroup label="Duration"></optgroup>
-        <option value="0">Duration (days)</option>
-        <option value="1">1</option>
-      </select>
-      <input placeholder="Number of Travelers" >
-      <select>
-        <option value="0">Choose Destination</option>
-        <option value="1">1</option>
-      </select>
+      <label for="start">Start date:
+        <input type="date" id="start" name="trip-start"
+        min="2000-01-01" max="2035-12-31">
+      </label>
+      <label for="trip-duration">Duration (days):
+        <input class="trip-duration">
+      </label>
+      <label for="num-travelers">Number of travelers:
+        <input class="num-travelers">
+      </label>
+      <label for="drop">Choose a destination:
+        <select class="drop" id="destination-drop">
+        <option value="0">Choose a destination</option>
+        </select>
+      </label>
     </div>
-    <button class="book-btn">Calculate Estimated Cost</button>
+    <h4 class="selection-err hidden">Please select appropriate inputs!</h4>
+    <button class="book-btn" aria-disabled="true">Calculate Estimated Cost</button>
   </section>
   <section class="trips">
     <div class="tabs">
