@@ -58,22 +58,58 @@ const destinationInput = document.querySelector('.drop');
 const selectionError = document.querySelector('.selection-err');
 
 bookingButton.addEventListener('click', (event) => {
-  if (startDateInput.value === '' || durationInput === '' || numTravelersInput === '' || destinationInput.value === ' ') {
-    //fix conditional so if date is selected still can't fire button
+  if (startDateInput.value === '' || durationInput === '' || numTravelersInput === '' || destinationInput.value <= 0) {
     selectionError.classList.remove('hidden')
   } else if (!event.target.classList.contains('book')) {
+    selectionError.classList.remove('hidden')
     selectionError.innerText = `This trip will cost $$`
-    bookingButton.classList.toggle('book');
-    domUpdates.changeBookTripButton();
+    bookingButton.classList.add('book');
+    domUpdates.changeBookTripButton(bookingButton);
   } else {
-    bookingButton.classList.toggle('book');
-    domUpdates.changeBookTripButton();
-    domUpdates.resetBookingArea(startDateInput, durationInput, numTravelersInput, destinationInput);
+    sendBookingRequest();
+    domUpdates.resetBookingArea(startDateInput, durationInput, numTravelersInput, destinationInput, bookingButton, selectionError);
+    domUpdates.changeBookTripButton(bookingButton);
     // const value = parseInt(durationInput.value)
     //post it!
   }
 
 })
+
+function sendBookingRequest() {
+  const newTrip = collectBookingData();
+  console.log(newTrip)
+}
+
+function collectBookingData() {
+  let duration = parseInt(durationInput.value);
+  let travelers = parseInt(numTravelersInput.value);
+  return {
+    id: getID(),
+    userID: currentTraveler.id,
+    destinationID: destinationInput.value,
+    travelers,
+    date: formatDateInput(),
+    duration,
+    status: 'pending',
+    suggestedActivities: []
+  }
+}
+
+function formatDateInput() {
+  let date = startDateInput.value;
+  const splitDate = date.split('-')
+  return `${splitDate[0]}/${splitDate[1]}/${splitDate[2]}`
+}
+
+function getID() {
+  const tripIDs = allTrips.filter(trip => {
+    return trip.id;
+  })
+  tripIDs.sort((a, b) => {
+    return b.id - a.id;
+  })
+  return tripIDs[0].id + 1;
+}
 
 // function createTrip() {
 //   let aTrip = new Trip(allTrips[7], createDestination());

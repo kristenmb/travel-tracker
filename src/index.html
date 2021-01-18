@@ -19,17 +19,17 @@
     <h3>BOOK A NEW ADVENTURE</h3>
     <div class="booking">
       <label for="start">Start date:
-        <input type="date" id="start" name="trip-start"
+        <input required type="date" id="start" name="trip-start"
         min="2000-01-01" max="2035-12-31">
       </label>
-      <label for="trip-duration">Duration (days):
-        <input class="trip-duration">
+      <label  for="trip-duration">Duration (days):
+        <input required class="trip-duration" type="number" min="1">
       </label>
       <label for="num-travelers">Number of travelers:
-        <input class="num-travelers">
+        <input required class="num-travelers" type="number" min="1">
       </label>
       <label for="drop">Choose a destination:
-        <select class="drop" id="destination-drop">
+        <select required class="drop" id="destination-drop">
         <option value="0">Choose a destination</option>
         </select>
       </label>
