@@ -80,7 +80,7 @@ class Traveler {
       let yearStart = new Date(this.todaysDate).setDate(new Date(this.todaysDate).getDate() - 365);
       if (trip.tripStartDate > yearStart) {
         return trip;
-      };
+      }
     });
 
     const annual = pastYearTrips.reduce((annualSpent, trip) => {
