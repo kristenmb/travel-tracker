@@ -1,6 +1,6 @@
 import './css/base.scss';
 
-import './images/turing-logo.png';
+import './images/travel.png';
 
 import Traveler from './Traveler.js';
 import Trip from './Trip.js';
@@ -13,18 +13,36 @@ let allDestinations;
 let currentTraveler;
 let today;
 const tripButtons = document.querySelectorAll('.trip-btns');
+const usernameInput = document.querySelector('#username');
+const passwordInput = document.querySelector('#password');
+const loginButton = document.querySelector('.submit');
+const logoutButton = document.querySelector('.logout');
 
+loginButton.addEventListener('click', checkCredentials);
+logoutButton.addEventListener('click', domUpdates.switchSectionDisplay)
 tripButtons.forEach(button => button.addEventListener('click', displayTrips))
-window.addEventListener('load', fetchAllInfo)
+// window.addEventListener('load', fetchAllInfo)
 
-function fetchAllInfo() {
+function checkCredentials() {
+  if (passwordInput.value !== 'travel2020' || usernameInput.value.length < 8 || !usernameInput.value.includes('traveler')) {
+    alert('NO!')
+  } else {
+    let user = parseInt(usernameInput.value.slice(8));
+    let userID = user - 1
+    fetchAllInfo(userID)
+    domUpdates.clearLoginInputs(usernameInput, passwordInput);
+    domUpdates.switchSectionDisplay();
+  }
+}
+
+function fetchAllInfo(id) {
   apiCalls.fetchAllData()
     .then(allData => {
       allTravelers = allData[0];
       allTrips = allData[1];
       allDestinations = allData[2];
       getTodaysDate();
-      createUser();
+      createUser(id);
       domUpdates.displayUserName(currentTraveler);
       currentTraveler.createAllTrips(allTrips, allDestinations);
       currentTraveler.sortAllTrips();
@@ -40,9 +58,8 @@ function fetchAllInfo() {
     })
 }
 
-function createUser() {
-  currentTraveler = new Traveler(allTravelers[35], today)
-  // console.log(currentTraveler);
+function createUser(id) {
+  currentTraveler = new Traveler(allTravelers[id], today)
 }
 
 function getTodaysDate() {
@@ -51,6 +68,7 @@ function getTodaysDate() {
 
 function displayTrips(event) {
   domUpdates.displayTrips(currentTraveler, event.target.id);
+  domUpdates.displayTripSection(event.target.id)
   // apiCalls.deleteTrip(201);
 }
 
@@ -93,7 +111,7 @@ function sendBookingRequest() {
   const newTrip = collectBookingData();
   apiCalls.postNewTrip(newTrip, currentTraveler, allDestinations)
     .then(res => {
-      fetchAllInfo()
+      fetchAllInfo(currentTraveler.id - 1)
     });
 }
 

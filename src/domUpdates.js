@@ -1,4 +1,17 @@
+
 const domUpdates = {
+  switchSectionDisplay() {
+    const loginPage = document.querySelector('.login-page');
+    const travelerDash = document.querySelector('.traveler-view');
+    loginPage.classList.toggle('hidden');
+    travelerDash.classList.toggle('hidden');
+  },
+
+  clearLoginInputs(username, password) {
+    username.value = ''
+    password.value = ''
+  },
+
   displayUserName(currentUser) {
     const welcomeMessage = document.querySelector('.greeting');
     const fullName = currentUser.name.split(' ');
@@ -11,9 +24,7 @@ const domUpdates = {
     tripCards.innerHTML = '';
     let tripInfo = '';
     if (currentUser[displayType].length > 0) {
-
       currentUser[displayType].forEach(trip => {
-        console.log(trip.destination.image)
         const formattedDate = this.formatDate(trip.date);
         tripInfo += `
         <article class="trip-cards">
@@ -26,17 +37,24 @@ const domUpdates = {
         Duration: ${trip.duration} <br>
         Status: ${trip.status} <br> </p>
         <a disabled href="">Request activities from your travel agent!</a>
-        
         </article>
         `;
       })
     } else {
       tripInfo = `
-        <p class="no-trips">You do not have any ${displayType} trips :( <br>
-        Plan one above!</p>`
+        <h3 class="no-trips">You do not have any ${displayType} trips :( <br>
+        Plan one above!</h3>`
     }
-    
+  
     tripCards.insertAdjacentHTML('beforeend', tripInfo)
+  },
+
+  displayTripSection(displayType) {
+    const displayTripSection = document.querySelector('#trip-type-section');
+    if (displayType === 'present') {
+      displayType = 'current'
+    }
+    displayTripSection.innerHTML = `${displayType.toUpperCase()} TRIPS`;
   },
 
   formatDate(date) {

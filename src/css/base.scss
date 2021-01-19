@@ -25,6 +25,49 @@ h1 {
   background-color: $accent-color;
 }
 
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-section {
+  background-color: $secondary-background;
+  border: 2pt $black solid;
+  height: 50vh;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.login-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 15vh;
+}
+
+.submit {
+  font-size: large;
+}
+
+.example {
+  min-height: 80vh;
+  min-width: 75vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-image: url(https://images.unsplash.com/photo-1507812984078-917a274065be?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2800&q=80);
+}
+
+.login-img {
+  height: 15vh;
+}
+
 @import "responsive";
 
 .hidden {
