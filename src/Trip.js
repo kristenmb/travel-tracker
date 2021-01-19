@@ -7,7 +7,6 @@ class Trip {
     this.date = tripData.date;
     this.duration = tripData.duration;
     this.status = tripData.status;
-    //or pending?
     this.activities = tripData.suggestedActivities;
     this.tripStartDate;
     this.tripEndDate;

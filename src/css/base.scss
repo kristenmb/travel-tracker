@@ -1,71 +1,45 @@
 @import "variables";
+@import "mixin";
+@import "login";
 @import "header";
 @import "bookingbar";
 @import "tripview";
 
 html {
-  height: 100vh;
-  width: 100vw;
-  background-color: $primary-background;
-  display: flex;
+  @include dimensions(100vh, 100vw);
+  @include flex(row);
   justify-content: center;
+  background-color: $primary-background;
   font-family: 'Yusei Magic',
   sans-serif;
 }
 
 body {
-  width: 90vw;
+  @include dimensions(auto, 90vw);
 }
 
 h1 {
-  margin: 0
+  margin: 0;
+}
+
+button {
+  font-family: 'Yusei Magic',
+  sans-serif;
 }
 
 .small-btn {
   background-color: $accent-color;
 }
 
-.login-page {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
+footer {
+  height: 6vh;
+  @include flex(row);
+  justify-content: flex-end;
   align-items: center;
 }
 
-.login-section {
-  background-color: $secondary-background;
-  border: 2pt $black solid;
-  height: 50vh;
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.login-inputs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 15vh;
-}
-
-.submit {
-  font-size: large;
-}
-
-.example {
-  min-height: 80vh;
-  min-width: 75vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  // background-image: url(https://images.unsplash.com/photo-1507812984078-917a274065be?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2800&q=80);
-}
-
-.login-img {
-  height: 15vh;
+.footer-info {
+  padding: 0 2% 0 2%;
 }
 
 @import "responsive";

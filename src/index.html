@@ -15,10 +15,11 @@
           <h1>Welcome to your next adventure!</h1>
           <img class="login-img" src="../images/travel.png" alt="airplane over mountains icon">
           <div class="login-inputs">
-            <label for="username">Username:
+            <p class="login-error hidden">Incorrect password or username, <br> please try again!</p>
+            <label for="username" class="login-labels">Username:
               <input type="text" placeholder="username" id="username">
             </label>
-            <label for="password"> Password:
+            <label for="password" class="login-labels"> Password:
               <input type="password" placeholder="password" id="password">
             </label>
             <button class="submit small-btn">Login</button>
@@ -57,7 +58,7 @@
           </label>
         </div>
         <h4 class="selection-err hidden">Please select appropriate inputs!</h4>
-        <button class="book-btn small-btn" aria-disabled="true">Calculate Estimated Cost</button>
+        <button class="book-btn small-btn">Calculate Estimated Cost</button>
       </section>
       <section class="trips">
         <div class="tabs">
@@ -70,6 +71,11 @@
         <div class="card-container">
         </div>
       </section>
+      <footer>
+        <p class="footer-info">Suggest New Destination</p>
+        <p class="footer-info">FAQs</p>
+        <p class="footer-info">About Us</p>
+      </footer>
   </div>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>

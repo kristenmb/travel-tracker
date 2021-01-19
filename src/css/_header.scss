@@ -1,22 +1,21 @@
 header {
-  border: 2pt black solid;
-  display: flex;
+  @include flex(row);
   justify-content: space-between;
   align-items: flex-end;
-  color: black;
+  border: 2pt $black solid;
+  color: $black;
+  padding: .75%;
 }
 
 .left {
-  display: flex;
-  flex-direction: column;
+  @include flex(column);
   justify-content: flex-end;
 }
 
 .right {
-  display: flex;
-  flex-direction: column;
+  @include dimensions(20vh, auto);
+  @include flex(column);
   justify-content: space-between;
-  height: 20vh;
 }
 
 .logout {

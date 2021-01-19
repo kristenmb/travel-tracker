@@ -1,0 +1,87 @@
+@media screen and (max-width: 1300px) {
+  .trip-cards {
+    @include dimensions(45vh, 40vw);
+  }
+
+  .drop {
+    @include dimensions(auto, 15vw);
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .trip-cards {
+    @include dimensions(45vh, 70vw);
+  }
+
+  .trip-img {
+    @include dimensions(auto, 100vw);
+  }
+
+  .drop {
+    @include dimensions(auto, 20vw);
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  header {
+    @include flex(column);
+    align-items: center;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  .left {
+    align-items: center;
+  }
+
+  .right {
+    align-items: center;
+    height: auto;
+  }
+
+  .logout {
+    align-self: center;
+  }
+
+  .adventure {
+    height: auto;
+  }
+
+  .trip-btns {
+    font-size: 10pt;
+  }
+
+  .booking {
+    @include flex(column);
+    max-width: 54vw;
+  }
+
+  .book-btn {
+    margin: 5%;
+  }
+
+  .img-wrap {
+    width: 60vw;
+  }
+
+  label {
+    margin: 1% 0;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .booking {
+    max-width: 25vw;
+  }
+
+  .drop {
+    width: 20vw;
+  }
+
+  label {
+    margin: 0 6%;
+  }
+}

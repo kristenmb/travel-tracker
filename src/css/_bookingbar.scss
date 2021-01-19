@@ -1,21 +1,25 @@
 .adventure {
-  border: 2px black solid;
-  display: flex;
-  height: 25vh;
-  flex-direction: column;
+  @include dimensions(25vh, auto);
+  @include flex(column);
   align-items: center;
   justify-content: space-evenly;
+  border: 2px $black solid;
   background-color: $secondary-background;
 }
 
 .booking {
-  display: flex;
-  width: 70vw;
-  justify-content: space-evenly;
-  display: flex;
+  @include flex(row);
   justify-content: space-between;
+  text-align: center;
+  max-width: 70vw;
 }
 
 label {
   color: $white;
+  margin: 1%;
+}
+
+.drop {
+  width: 10vw;
+  padding: 1%;
 }

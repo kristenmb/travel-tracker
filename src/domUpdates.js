@@ -1,4 +1,3 @@
-
 const domUpdates = {
   switchSectionDisplay() {
     const loginPage = document.querySelector('.login-page');
@@ -8,15 +7,15 @@ const domUpdates = {
   },
 
   clearLoginInputs(username, password) {
-    username.value = ''
-    password.value = ''
+    username.value = '';
+    password.value = '';
   },
 
   displayUserName(currentUser) {
     const welcomeMessage = document.querySelector('.greeting');
     const fullName = currentUser.name.split(' ');
-    const name = fullName[0]
-    welcomeMessage.innerText = `Welcome, ${name}`
+    const name = fullName[0];
+    welcomeMessage.innerText = `Welcome, ${name}`;
   },
 
   displayTrips(currentUser, displayType) {
@@ -31,28 +30,28 @@ const domUpdates = {
         <div class="img-wrap">
         <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}>
         </div>
-        <h4 class="destination-name">${trip.destination.destination}</h4>
+        <h3 class="destination-name">${trip.destination.destination}</h3>
         <p>Trip date: ${formattedDate} <br>
         Travelers: ${trip.travelerCount} <br>
         Duration: ${trip.duration} <br>
         Status: ${trip.status} <br> </p>
-        <a disabled href="">Request activities from your travel agent!</a>
+        <a>Request activities from your travel agent!</a>
         </article>
         `;
       })
     } else {
       tripInfo = `
         <h3 class="no-trips">You do not have any ${displayType} trips :( <br>
-        Plan one above!</h3>`
+        Plan one above!</h3>`;
     }
   
-    tripCards.insertAdjacentHTML('beforeend', tripInfo)
+    tripCards.insertAdjacentHTML('beforeend', tripInfo);
   },
 
   displayTripSection(displayType) {
     const displayTripSection = document.querySelector('#trip-type-section');
     if (displayType === 'present') {
-      displayType = 'current'
+      displayType = 'current';
     }
     displayTripSection.innerHTML = `${displayType.toUpperCase()} TRIPS`;
   },
@@ -64,25 +63,42 @@ const domUpdates = {
 
   displaySpending(cost) {
     const annualSpending = document.querySelector('#spending');
-    annualSpending.innerText = `Total spent this year: $${cost}`
+    annualSpending.innerText = `Total spent this year: $${cost}`;
   },
 
   createBookingSection(today, allDestinations) {
-    //sort alphabetically?
     const dropDown = document.querySelector('#destination-drop');
+    allDestinations.sort((a, b) => {
+      let destinationA = a.destination;
+      let destinationB = b.destination;
+      if (destinationA < destinationB) {
+        return -1;
+      } else if (destinationA > destinationB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
     let destinations = '';
-    allDestinations.forEach((destination, i) => {
-        destinations += `<option value="${destination.id}">${destination.destination}</option>`
-    })
-    dropDown.insertAdjacentHTML('beforeend', destinations)
+    allDestinations.forEach((destination) => {
+      destinations += `<option value="${destination.id}">${destination.destination}</option>`;
+    });
+
+    dropDown.insertAdjacentHTML('beforeend', destinations);
+  },
+
+  displayTripCost(message, button, cost) {
+    message.classList.remove('hidden');
+    message.innerText = `This trip will cost $${cost}`;
+    button.classList.add('book');
   },
 
   changeBookTripButton(button) {
-    // const estimatedCostButton = document.querySelector('.book-btn');
     if (button.classList.contains('book')) {
-      button.innerText = 'Book It!'
+      button.innerText = 'Book It!';
     } else {
-      button.innerText = 'Calculate Estimated Cost'
+      button.innerText = 'Calculate Estimated Cost';
     }
   },
   
@@ -92,12 +108,15 @@ const domUpdates = {
     numTravelers.value = '';
     destination.value = 0;
     button.classList.remove('book');
-    message.innerText = 'Please select appropriate inputs!'
+    message.innerText = 'Please select appropriate inputs!';
     message.classList.add('hidden');
+  },
+
+  displayFetchErrorHandling(message, selector) {
+    let error = document.querySelector(selector);
+    error.classList.remove('hidden');
+    error.innerText = message;
   }
 }
-
-
-// fullDate.toDateString();
 
 export default domUpdates;
