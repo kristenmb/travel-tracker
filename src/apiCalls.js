@@ -1,38 +1,43 @@
 import domUpdates from './domUpdates.js';
 import Trip from './Trip.js'
-// import domUpdates from './domUpdates.js'
 
 const apiCalls = {
   getAllTravelers() {
     return fetch('http://localhost:3001/api/v1/travelers')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          domUpdates.displayFetchErrorHandling('We\'re having trouble with our site, please check back later!', '.login-error')
+        }
+        return response.json();
+      })
       .then(allTravelers => {
         return allTravelers.travelers
       })
-      .catch(err => {
-        console.log(err);
-        alert('Oops, all travelers failed to load.');
-      })
+      .catch(err => console.log(err))
   },
   
   getAllTrips() {
     return fetch('http://localhost:3001/api/v1/trips')
-      .then(response => response.json())
-      .then(allTrips => allTrips.trips)
-      .catch(err => {
-        console.log(err);
-        alert('Oops, all trips failed to load.');
+      .then(response => {
+        if (!response.ok) {
+          domUpdates.displayFetchErrorHandling('We\'re having trouble with our site, please check back later!', '.login-error')
+        }
+        return response.json();
       })
+      .then(allTrips => allTrips.trips)
+      .catch(err => console.log(err))
   },
   
   getAllDestinations() {
     return fetch('http://localhost:3001/api/v1/destinations')
-      .then(response => response.json())
-      .then(allDestinations => allDestinations.destinations)
-      .catch(err => {
-        console.log(err);
-        alert('Oops, all destinations failed to load.');
+      .then(response => {
+        if (!response.ok) {
+          domUpdates.displayFetchErrorHandling('We\'re having trouble with our site, please check back later!', '.login-error')
+        }
+        return response.json();
       })
+      .then(allDestinations => allDestinations.destinations)
+      .catch(err => console.log(err))
   },
   
   fetchAllData() {
@@ -40,9 +45,7 @@ const apiCalls = {
       .then(values => {
         return values;
       })
-      .catch(err => {
-        console.log(err);
-      })   
+      .catch(err => console.log(err))   
   },
 
   postNewTrip(newestTrip, currentTraveler, allDestinations) {
@@ -53,30 +56,22 @@ const apiCalls = {
       },
       body: JSON.stringify(newestTrip), 
     })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          domUpdates.displayFetchErrorHandling('We\'re having trouble reaching the server, please contact your agent to book!', '.selection-err')
+        }
+        return response.json();
+      })
       .then(data => {
-        console.log(data, 'DATA')
-        console.log(data.newTrip, 'NEW RESOURCE')
-
         let requestedTrip = data.newTrip;
         let tripDestination = allDestinations.find(destination => {
           return destination.id === requestedTrip.destinationID;
-        })
-        requestedTrip = new Trip(requestedTrip, tripDestination)
+        });
+        requestedTrip = new Trip(requestedTrip, tripDestination);
         currentTraveler.sortAllTrips();
       })
-      .catch(err => {
-        console.log(err)
-      });
-  },
-
-  // deleteTrip(id) {
-  //   return fetch(`http://localhost:3001/api/v1/trips/${id}`, {
-  //     method: 'DELETE',
-  //   })
-  //   .then(response => response.json())
-  //   .then(info => console.log(info))
-  // }
+      .catch(err => console.log(err));
+  }
 }
 
 export default apiCalls;
