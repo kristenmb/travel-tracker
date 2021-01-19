@@ -13,19 +13,26 @@ let allDestinations;
 let currentTraveler;
 let today;
 const tripButtons = document.querySelectorAll('.trip-btns');
-const usernameInput = document.querySelector('#username');
-const passwordInput = document.querySelector('#password');
+
 const loginButton = document.querySelector('.submit');
 const logoutButton = document.querySelector('.logout');
+const bookingButton = document.querySelector('.book-btn');
+const startDateInput = document.querySelector('#start');
+const durationInput = document.querySelector('.trip-duration');
+const numTravelersInput = document.querySelector('.num-travelers');
+const destinationInput = document.querySelector('.drop');
 
+bookingButton.addEventListener('click', handleBookings);
 loginButton.addEventListener('click', checkCredentials);
 logoutButton.addEventListener('click', domUpdates.switchSectionDisplay)
 tripButtons.forEach(button => button.addEventListener('click', displayTrips))
-// window.addEventListener('load', fetchAllInfo)
 
 function checkCredentials() {
+  const usernameInput = document.querySelector('#username');
+  const passwordInput = document.querySelector('#password');
   if (passwordInput.value !== 'travel2020' || usernameInput.value.length < 8 || !usernameInput.value.includes('traveler')) {
     alert('NO!')
+//////add error handling here
   } else {
     let user = parseInt(usernameInput.value.slice(8));
     let userID = user - 1
@@ -43,23 +50,21 @@ function fetchAllInfo(id) {
       allDestinations = allData[2];
       getTodaysDate();
       createUser(id);
-      domUpdates.displayUserName(currentTraveler);
-      currentTraveler.createAllTrips(allTrips, allDestinations);
-      currentTraveler.sortAllTrips();
-      domUpdates.displayTrips(currentTraveler, 'upcoming');
-      domUpdates.createBookingSection(today, allDestinations);
-      console.log(currentTraveler.todaysDate)
-      console.log(currentTraveler.past, 'PAST')
-      console.log(currentTraveler.present, 'PRESENT')
-      console.log(currentTraveler.upcoming, 'UPCOMING')
-      console.log(currentTraveler.pending, 'PENDING')
-      // console.log(currentTraveler.calculateMoneySpentThisYear(), 'LOOK')
-      domUpdates.displaySpending(currentTraveler.calculateMoneySpentThisYear())
+      displayUser();
     })
 }
 
 function createUser(id) {
-  currentTraveler = new Traveler(allTravelers[id], today)
+  currentTraveler = new Traveler(allTravelers[id], today);
+  currentTraveler.createAllTrips(allTrips, allDestinations);
+  currentTraveler.sortAllTrips();
+}
+
+function displayUser() {
+  domUpdates.displayUserName(currentTraveler);
+  domUpdates.displayTrips(currentTraveler, 'upcoming');
+  domUpdates.createBookingSection(today, allDestinations);
+  domUpdates.displaySpending(currentTraveler.calculateMoneySpentThisYear());
 }
 
 function getTodaysDate() {
@@ -72,29 +77,18 @@ function displayTrips(event) {
   // apiCalls.deleteTrip(201);
 }
 
-const bookingButton = document.querySelector('.book-btn');
-const startDateInput = document.querySelector('#start');
-const durationInput = document.querySelector('.trip-duration');
-const numTravelersInput = document.querySelector('.num-travelers');
-const destinationInput = document.querySelector('.drop');
-const selectionError = document.querySelector('.selection-err');
-
-bookingButton.addEventListener('click', handleBookings);
-
 function handleBookings(event) {
+  const selectionError = document.querySelector('.selection-err');
   if (startDateInput.value === '' || durationInput === '' || numTravelersInput === '' || destinationInput.value <= 0) {
     selectionError.classList.remove('hidden')
   } else if (!event.target.classList.contains('book')) {
-    selectionError.classList.remove('hidden')
-    selectionError.innerText = `This trip will cost $${estimateNewTripCost()}`
-    bookingButton.classList.add('book');
+    const cost = estimateNewTripCost();
+    domUpdates.displayTripCost(selectionError, bookingButton, cost);
     domUpdates.changeBookTripButton(bookingButton);
   } else {
     sendBookingRequest();
     domUpdates.resetBookingArea(startDateInput, durationInput, numTravelersInput, destinationInput, bookingButton, selectionError);
     domUpdates.changeBookTripButton(bookingButton);
-    // const value = parseInt(durationInput.value)
-    //post it!
   }
 }
 
@@ -102,7 +96,7 @@ function estimateNewTripCost() {
   let trip = collectBookingData();
   let myDestination = allDestinations.find(destination => {
     return destination.id === trip.destinationID;
-  })
+  });
   let pendingTrip = new Trip (trip, myDestination);
   return pendingTrip.estimatedTripCost();
 }
@@ -146,18 +140,3 @@ function getID() {
   })
   return tripIDs[0].id + 1;
 }
-
-// function createTrip() {
-//   let aTrip = new Trip(allTrips[7], createDestination());
-//   console.log(aTrip)
-//   aTrip.estimatedTripCost();
-// }
-
-// function createDestination() {
-//   let destination;
-//   allDestinations.forEach(location => {
-//     destination = new Destination(location);
-
-//   })
-//   return destination;
-// }
