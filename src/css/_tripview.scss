@@ -1,22 +1,21 @@
 .trips {
-  height: 100vh;
-  border: 2pt black solid;
-  display:flex;
-  flex-direction: column;
+  @include dimensions(100vh, auto);
+  @include flex(column);
   align-items: center;
   justify-content: center;
+  border: 2pt $black solid;
 }
 
 .tabs {
-  display: flex;
+  @include dimensions(auto, 90vw);
+  @include flex(row);
   justify-content: space-evenly;
   align-content: center;
-  width: 90vw;
   margin-top: 0.5em;
 }
 
 .trip-btns {
-  width: 20vw;
+  @include dimensions(auto, 20vw);
   padding: 4%;
   font-size: 16pt;
   background-color: $accent-color;
@@ -24,20 +23,20 @@
 }
 
 .card-container {
-  display: flex;
+  @include dimensions(75vh, auto);
+
+  @include flex(row);
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding-top: 2em;
   overflow: auto;
-  height: 75vh;
   min-width: 90vw;
 }
 
 .trip-cards {
-  display: flex;
-  flex-direction: column;
+  @include dimensions(40vh, auto);
+  @include flex(column);
   align-items: center;
-  height: 40vh;
   border: 1pt $black solid;
   margin: 1.5em;
   background-color: rgba($color: $trip-card-background, $alpha: 0.3)
@@ -55,16 +54,15 @@ p {
 }
 
 .img-wrap {
+  @include dimensions(auto, 25vw);
   overflow: hidden;
   display: flex;
-  width: 25vw;
   justify-content: center;
 }
 
 .trip-img {
   max-width: auto;
   max-height: 100%;
-  // border-radius: 40%;
 }
 
 .destination-name {

@@ -1,0 +1,38 @@
+.login-page {
+  @include dimensions(100%, auto);
+  @include flex(row);
+  justify-content: center;
+  align-items: center;
+}
+
+.login-section {
+  @include dimensions(50vh, auto);
+  @include flex(column);
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: $secondary-background;
+  border: 2pt $black solid;
+  padding: 2%;
+}
+
+.login-inputs {
+  @include flex(column);
+  justify-content: space-between;
+  height: 15vh;
+}
+
+.login-error {
+  font-size: small;
+}
+
+.submit {
+  font-size: large;
+}
+
+.login-labels {
+  @include flex(column);
+}
+
+.login-img {
+  height: 15vh;
+}
