@@ -10,10 +10,9 @@
 
 .booking {
   display: flex;
-  width: 70vw;
-  justify-content: space-evenly;
-  display: flex;
+  max-width: 70vw;
   justify-content: space-between;
+  text-align: center;
 }
 
 label {

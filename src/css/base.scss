@@ -21,13 +21,17 @@ h1 {
   margin: 0
 }
 
+button {
+  font-family: 'Yusei Magic',
+  sans-serif;
+}
 .small-btn {
   background-color: $accent-color;
 }
 
 .login-page {
-  width: 100vw;
-  height: 100vh;
+  width: auto;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,8 +44,9 @@ h1 {
   width: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
+  padding: 2%;
 }
 
 .login-inputs {
@@ -49,6 +54,10 @@ h1 {
   flex-direction: column;
   justify-content: space-between;
   height: 15vh;
+}
+
+.login-error {
+  font-size: small;
 }
 
 .submit {
@@ -66,6 +75,17 @@ h1 {
 
 .login-img {
   height: 15vh;
+}
+
+footer {
+  height: 6vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer-info {
+  padding: 0 2% 0 2%;
 }
 
 @import "responsive";
