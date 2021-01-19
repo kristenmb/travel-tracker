@@ -1,5 +1,17 @@
 
 const domUpdates = {
+  switchSectionDisplay() {
+    const loginPage = document.querySelector('.login-page');
+    const travelerDash = document.querySelector('.traveler-view');
+    loginPage.classList.toggle('hidden');
+    travelerDash.classList.toggle('hidden');
+  },
+
+  clearLoginInputs(username, password) {
+    username.value = ''
+    password.value = ''
+  },
+
   displayUserName(currentUser) {
     const welcomeMessage = document.querySelector('.greeting');
     const fullName = currentUser.name.split(' ');
