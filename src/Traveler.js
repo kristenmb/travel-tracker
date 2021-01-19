@@ -35,21 +35,12 @@ class Traveler {
   }
 
   sortPresentTrips() {
-    // console.log(this.allTrips, 'ALL TRIPS')
     this.allTrips.forEach(trip => {
       trip.findTripDuration();
       let tripEnd = trip.tripEndDate;
-      // console.log(tripEnd, 'trip end')
       let tripStart = trip.tripStartDate;
-      // console.log(tripStart, 'tripstart')
       let today = new Date(this.todaysDate).getTime();
-      // console.log(today, 'butts')
-      // console.log(tripStart, 'start butts')
-      // console.log(tripEnd, 'end butts')
-      // console.log(tripStart <= today && today <= tripEnd)
-      // console.log(new Date(this.todaysDate).getTime(), 'today')
       if (tripStart <= today && today <= tripEnd) {
-        // console.log('in here')
         this.present.push(trip);
       }
     })
@@ -59,13 +50,7 @@ class Traveler {
     this.allTrips.forEach(trip => {
       trip.findTripDuration();
       let tripStart = trip.tripStartDate;
-      // console.log(tripStart)
-      // console.log(this.todaysDate < tripStart )
-      // let tripEnd = trip.tripEndDate;
       let today = new Date(this.todaysDate).getTime();
-      // console.log(today, 'butts')
-      // console.log(tripStart, 'start butts')
-      // console.log(today > tripStart)
       if (today < tripStart) {
         this.upcoming.push(trip)
       }
@@ -92,20 +77,17 @@ class Traveler {
   calculateMoneySpentThisYear() {
     let pastYearTrips = this.allTrips.filter(trip => {
       trip.findTripDuration();
-      // let today = new Date(this.todaysDate).getTime()
-      // console.log(today, 'today')
-      let yearStart = new Date(this.todaysDate).setDate(new Date(this.todaysDate).getDate() - 365)
-      // console.log(yearStart)
-      // console.log(trip.tripStartDate)
+      let yearStart = new Date(this.todaysDate).setDate(new Date(this.todaysDate).getDate() - 365);
       if (trip.tripStartDate > yearStart) {
         return trip;
       };
     });
+
     const annual = pastYearTrips.reduce((annualSpent, trip) => {
       trip.estimatedTripCost();
       annualSpent += trip.tripCost;
       return annualSpent;
-    }, 0)
+    }, 0);
   
     return annual;
   }

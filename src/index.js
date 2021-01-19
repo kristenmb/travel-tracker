@@ -18,6 +18,7 @@ const durationInput = document.querySelector('.trip-duration');
 const numTravelersInput = document.querySelector('.num-travelers');
 const destinationInput = document.querySelector('.drop');
 
+window.addEventListener('load', fetchAllInfo)
 loginButton.addEventListener('click', checkCredentials);
 bookingButton.addEventListener('click', handleBookings);
 logoutButton.addEventListener('click', domUpdates.switchSectionDisplay)
@@ -27,27 +28,36 @@ function checkCredentials() {
   const usernameInput = document.querySelector('#username');
   const passwordInput = document.querySelector('#password');
   const loginErrorMessage = document.querySelector('.login-error');
-  if (passwordInput.value !== 'travel2020' || usernameInput.value.length < 8 || !usernameInput.value.includes('traveler')) {
+  let user = parseInt(usernameInput.value.slice(8));
+  let userID = user - 1;
+  fetchAllInfo();
+  if (passwordInput.value !== 'travel2020' || usernameInput.value.length < 8 || !usernameInput.value.includes('traveler') || checkValidUser(user) === null) {
     loginErrorMessage.classList.remove('hidden');
   } else {
     loginErrorMessage.classList.add('hidden');
-    let user = parseInt(usernameInput.value.slice(8));
-    let userID = user - 1
-    fetchAllInfo(userID)
+    createUser(userID);
+    displayUser();
     domUpdates.clearLoginInputs(usernameInput, passwordInput);
     domUpdates.switchSectionDisplay();
   }
 }
 
-function fetchAllInfo(id) {
+function checkValidUser(newUser) {
+  const travelerID = allTravelers.find(traveler => traveler.id === newUser);
+  if (travelerID === undefined) {
+    return null;
+  } else {
+    return true;
+  }
+}
+
+function fetchAllInfo() {
   apiCalls.fetchAllData()
     .then(allData => {
       allTravelers = allData[0];
       allTrips = allData[1];
       allDestinations = allData[2];
       getTodaysDate();
-      createUser(id);
-      displayUser();
     })
 }
 
@@ -65,13 +75,12 @@ function displayUser() {
 }
 
 function getTodaysDate() {
-  today = new Date()
+  today = new Date();
 }
 
 function displayTrips(event) {
   domUpdates.displayTrips(currentTraveler, event.target.id);
   domUpdates.displayTripSection(event.target.id)
-  // apiCalls.deleteTrip(201);
 }
 
 function handleBookings(event) {
@@ -102,7 +111,10 @@ function sendBookingRequest() {
   const newTrip = collectBookingData();
   apiCalls.postNewTrip(newTrip, currentTraveler, allDestinations)
     .then(res => {
-      fetchAllInfo(currentTraveler.id - 1);
+      fetchAllInfo();
+      allTrips.push(newTrip);
+      createUser(currentTraveler.id - 1);
+      displayUser();
     });
   domUpdates.displayTripSection('upcoming');
 }

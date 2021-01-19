@@ -7,15 +7,15 @@ const domUpdates = {
   },
 
   clearLoginInputs(username, password) {
-    username.value = ''
-    password.value = ''
+    username.value = '';
+    password.value = '';
   },
 
   displayUserName(currentUser) {
     const welcomeMessage = document.querySelector('.greeting');
     const fullName = currentUser.name.split(' ');
-    const name = fullName[0]
-    welcomeMessage.innerText = `Welcome, ${name}`
+    const name = fullName[0];
+    welcomeMessage.innerText = `Welcome, ${name}`;
   },
 
   displayTrips(currentUser, displayType) {
@@ -42,16 +42,16 @@ const domUpdates = {
     } else {
       tripInfo = `
         <h3 class="no-trips">You do not have any ${displayType} trips :( <br>
-        Plan one above!</h3>`
+        Plan one above!</h3>`;
     }
   
-    tripCards.insertAdjacentHTML('beforeend', tripInfo)
+    tripCards.insertAdjacentHTML('beforeend', tripInfo);
   },
 
   displayTripSection(displayType) {
     const displayTripSection = document.querySelector('#trip-type-section');
     if (displayType === 'present') {
-      displayType = 'current'
+      displayType = 'current';
     }
     displayTripSection.innerHTML = `${displayType.toUpperCase()} TRIPS`;
   },
@@ -63,7 +63,7 @@ const domUpdates = {
 
   displaySpending(cost) {
     const annualSpending = document.querySelector('#spending');
-    annualSpending.innerText = `Total spent this year: $${cost}`
+    annualSpending.innerText = `Total spent this year: $${cost}`;
   },
 
   createBookingSection(today, allDestinations) {
@@ -82,23 +82,23 @@ const domUpdates = {
 
     let destinations = '';
     allDestinations.forEach((destination) => {
-      destinations += `<option value="${destination.id}">${destination.destination}</option>`
+      destinations += `<option value="${destination.id}">${destination.destination}</option>`;
     });
 
-    dropDown.insertAdjacentHTML('beforeend', destinations)
+    dropDown.insertAdjacentHTML('beforeend', destinations);
   },
 
   displayTripCost(message, button, cost) {
-    message.classList.remove('hidden')
-    message.innerText = `This trip will cost $${cost}`
+    message.classList.remove('hidden');
+    message.innerText = `This trip will cost $${cost}`;
     button.classList.add('book');
   },
 
   changeBookTripButton(button) {
     if (button.classList.contains('book')) {
-      button.innerText = 'Book It!'
+      button.innerText = 'Book It!';
     } else {
-      button.innerText = 'Calculate Estimated Cost'
+      button.innerText = 'Calculate Estimated Cost';
     }
   },
   
@@ -108,8 +108,14 @@ const domUpdates = {
     numTravelers.value = '';
     destination.value = 0;
     button.classList.remove('book');
-    message.innerText = 'Please select appropriate inputs!'
+    message.innerText = 'Please select appropriate inputs!';
     message.classList.add('hidden');
+  },
+
+  displayFetchErrorHandling(message, selector) {
+    let error = document.querySelector(selector);
+    error.classList.remove('hidden');
+    error.innerText = message;
   }
 }
 
