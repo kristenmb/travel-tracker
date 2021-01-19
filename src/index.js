@@ -18,18 +18,19 @@ const durationInput = document.querySelector('.trip-duration');
 const numTravelersInput = document.querySelector('.num-travelers');
 const destinationInput = document.querySelector('.drop');
 
-bookingButton.addEventListener('click', handleBookings);
 loginButton.addEventListener('click', checkCredentials);
+bookingButton.addEventListener('click', handleBookings);
 logoutButton.addEventListener('click', domUpdates.switchSectionDisplay)
 tripButtons.forEach(button => button.addEventListener('click', displayTrips))
 
 function checkCredentials() {
   const usernameInput = document.querySelector('#username');
   const passwordInput = document.querySelector('#password');
+  const loginErrorMessage = document.querySelector('.login-error');
   if (passwordInput.value !== 'travel2020' || usernameInput.value.length < 8 || !usernameInput.value.includes('traveler')) {
-    alert('NO!')
-//////add error handling here
+    loginErrorMessage.classList.remove('hidden')
   } else {
+    loginErrorMessage.classList.add('hidden')
     let user = parseInt(usernameInput.value.slice(8));
     let userID = user - 1
     fetchAllInfo(userID)
