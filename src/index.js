@@ -28,9 +28,9 @@ function checkCredentials() {
   const passwordInput = document.querySelector('#password');
   const loginErrorMessage = document.querySelector('.login-error');
   if (passwordInput.value !== 'travel2020' || usernameInput.value.length < 8 || !usernameInput.value.includes('traveler')) {
-    loginErrorMessage.classList.remove('hidden')
+    loginErrorMessage.classList.remove('hidden');
   } else {
-    loginErrorMessage.classList.add('hidden')
+    loginErrorMessage.classList.add('hidden');
     let user = parseInt(usernameInput.value.slice(8));
     let userID = user - 1
     fetchAllInfo(userID)
@@ -102,8 +102,9 @@ function sendBookingRequest() {
   const newTrip = collectBookingData();
   apiCalls.postNewTrip(newTrip, currentTraveler, allDestinations)
     .then(res => {
-      fetchAllInfo(currentTraveler.id - 1)
+      fetchAllInfo(currentTraveler.id - 1);
     });
+  domUpdates.displayTripSection('upcoming');
 }
 
 function collectBookingData() {

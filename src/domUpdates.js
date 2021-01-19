@@ -1,4 +1,3 @@
-
 const domUpdates = {
   switchSectionDisplay() {
     const loginPage = document.querySelector('.login-page');
@@ -31,7 +30,7 @@ const domUpdates = {
         <div class="img-wrap">
         <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}>
         </div>
-        <h4 class="destination-name">${trip.destination.destination}</h4>
+        <h3 class="destination-name">${trip.destination.destination}</h3>
         <p>Trip date: ${formattedDate} <br>
         Travelers: ${trip.travelerCount} <br>
         Duration: ${trip.duration} <br>
