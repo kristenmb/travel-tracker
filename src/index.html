@@ -11,21 +11,19 @@
   </head>
   <body>
     <div class="login-page">
-      <div class="example">
       <section class="login-section">
           <h1>Welcome to your next adventure!</h1>
-          <img class="login-img" src="../images/travel.png" alt="airplane over moutains icon">
+          <img class="login-img" src="../images/travel.png" alt="airplane over mountains icon">
           <div class="login-inputs">
             <label for="username">Username:
-              <input type="text" placeholder="username">
+              <input type="text" placeholder="username" id="username">
             </label>
             <label for="password"> Password:
-              <input type="password" placeholder="password">
+              <input type="password" placeholder="password" id="password">
             </label>
             <button class="submit small-btn">Login</button>
           </div>
         </section>
-      </div>
     </div>
     <div class="traveler-view hidden">
       <header>
@@ -33,6 +31,7 @@
           <h1 class="greeting">Welcome, User</h1>
           <h2>Let's plan an adventure!</h2>  
         </div>
+        <img class="login-img" src="../images/travel.png" alt="airplane over mountains icon">
         <div class="right">
           <button class="logout small-btn">Log Out</button>
           <h2 id="spending">Total Spent this year: $$</h2>  
