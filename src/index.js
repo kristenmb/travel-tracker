@@ -7,13 +7,9 @@ import Trip from './Trip.js';
 import domUpdates from './domUpdates.js';
 import apiCalls from './apiCalls.js'
 
-let allTravelers;
-let allTrips;
-let allDestinations;
-let currentTraveler;
-let today;
-const tripButtons = document.querySelectorAll('.trip-btns');
+let allTravelers, allTrips, allDestinations, currentTraveler, today;
 
+const tripButtons = document.querySelectorAll('.trip-btns');
 const loginButton = document.querySelector('.submit');
 const logoutButton = document.querySelector('.logout');
 const bookingButton = document.querySelector('.book-btn');

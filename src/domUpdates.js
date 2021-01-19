@@ -68,17 +68,34 @@ const domUpdates = {
   },
 
   createBookingSection(today, allDestinations) {
-    //sort alphabetically?
     const dropDown = document.querySelector('#destination-drop');
+    allDestinations.sort((a, b) => {
+      let destinationA = a.destination;
+      let destinationB = b.destination;
+      if (destinationA < destinationB) {
+        return -1;
+      } else if (destinationA > destinationB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
     let destinations = '';
-    allDestinations.forEach((destination, i) => {
-        destinations += `<option value="${destination.id}">${destination.destination}</option>`
-    })
+    allDestinations.forEach((destination) => {
+      destinations += `<option value="${destination.id}">${destination.destination}</option>`
+    });
+
     dropDown.insertAdjacentHTML('beforeend', destinations)
   },
 
+  displayTripCost(message, button, cost) {
+    message.classList.remove('hidden')
+    message.innerText = `This trip will cost $${cost}`
+    button.classList.add('book');
+  },
+
   changeBookTripButton(button) {
-    // const estimatedCostButton = document.querySelector('.book-btn');
     if (button.classList.contains('book')) {
       button.innerText = 'Book It!'
     } else {
@@ -96,8 +113,5 @@ const domUpdates = {
     message.classList.add('hidden');
   }
 }
-
-
-// fullDate.toDateString();
 
 export default domUpdates;
