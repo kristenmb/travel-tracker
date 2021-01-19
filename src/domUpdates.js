@@ -35,7 +35,7 @@ const domUpdates = {
         Travelers: ${trip.travelerCount} <br>
         Duration: ${trip.duration} <br>
         Status: ${trip.status} <br> </p>
-        <a disabled href="">Request activities from your travel agent!</a>
+        <a>Request activities from your travel agent!</a>
         </article>
         `;
       })
