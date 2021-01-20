@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="#">
+    <meta name="authors" content="Kristen Bair">
+    <meta name="description" content="Mod 2 - Final Project - Travel Tracker">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adventure Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="login-page">
+      <section class="login-section">
+          <h1>Welcome to your next adventure!</h1>
+          <img class="login-img" src="./images/travel.png" alt="airplane over mountains icon">
+          <div class="login-inputs">
+            <p class="login-error hidden">Incorrect password or username, <br> please try again!</p>
+            <label for="username" class="login-labels">Username:
+              <input type="text" placeholder="username" id="username">
+            </label>
+            <label for="password" class="login-labels"> Password:
+              <input type="password" placeholder="password" id="password">
+            </label>
+            <button class="submit small-btn">Login</button>
+          </div>
+        </section>
+    </div>
+    <div class="traveler-view hidden">
+      <header>
+        <div class="left">
+          <h1 class="greeting">Welcome, User</h1>
+          <h2>Let's plan an adventure!</h2>  
+        </div>
+        <img class="login-img" src="./images/travel.png" alt="airplane over mountains icon">
+        <div class="right">
+          <button class="logout small-btn">Log Out</button>
+          <h2 id="spending">Total Spent this year: $$</h2>  
+        </div>
+      </header>
+      <section class="adventure">
+        <h3>BOOK A NEW ADVENTURE</h3>
+        <div class="booking">
+          <label for="start">Start date:
+            <input required type="date" id="start" name="trip-start"
+            min="2000-01-01" max="2035-12-31">
+          </label>
+          <label  for="trip-duration">Duration (days):
+            <input required class="trip-duration" type="number" min="1">
+          </label>
+          <label for="num-travelers">Number of travelers:
+            <input required class="num-travelers" type="number" min="1">
+          </label>
+          <label for="drop">Choose a destination:
+            <select required class="drop" id="destination-drop">
+              <option value="0">Choose a destination</option>
+            </select>
+          </label>
+        </div>
+        <h4 class="selection-err hidden">Please select appropriate inputs!</h4>
+        <button class="book-btn small-btn">Calculate Estimated Cost</button>
+      </section>
+      <section class="trips">
+        <div class="tabs">
+          <button class="trip-btns" id="upcoming">Upcoming Trips</button>
+          <button class="trip-btns" id="present">Current Trips</button>
+          <button class="trip-btns" id="pending">Pending Trips</button>
+          <button class="trip-btns" id="past">Past Trips</button>
+        </div>
+        <h2 id="trip-type-section">UPCOMING TRIPS</h2>
+        <div class="card-container">
+        </div>
+      </section>
+      <footer>
+        <p class="footer-info">Suggest New Destination</p>
+        <p class="footer-info">FAQs</p>
+        <p class="footer-info">About Us</p>
+      </footer>
+  </div>
+    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+  <script src="main.bundle.js"></script></body>
+  </html>
+  
