@@ -4,7 +4,7 @@ import Trip from '../src/Trip.js';
 import tripData from './test-data/trip-test-data.js';
 import destinationData from './test-data/destination-test-data.js'
 
-describe('Traveler', () => {
+describe('Trip', () => {
   let trip;
   let trip2;
  
