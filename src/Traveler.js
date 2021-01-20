@@ -40,7 +40,7 @@ class Traveler {
       let tripEnd = trip.tripEndDate;
       let tripStart = trip.tripStartDate;
       let today = new Date(this.todaysDate).getTime();
-      if (tripStart <= today && today <= tripEnd) {
+      if (tripStart <= today && today <= tripEnd  && !this.present.includes(trip)) {
         this.present.push(trip);
       }
     })
@@ -51,7 +51,7 @@ class Traveler {
       trip.findTripDuration();
       let tripStart = trip.tripStartDate;
       let today = new Date(this.todaysDate).getTime();
-      if (today < tripStart) {
+      if (today < tripStart && !this.upcoming.includes(trip)) {
         this.upcoming.push(trip)
       }
     })
@@ -61,7 +61,7 @@ class Traveler {
     this.allTrips.forEach(trip => {
       trip.findTripDuration();
       let tripEnd = trip.tripEndDate;
-      if (tripEnd < this.todaysDate) {
+      if (tripEnd < this.todaysDate && !this.past.includes(trip)) {
         this.past.push(trip)
       }
     })
@@ -70,7 +70,9 @@ class Traveler {
   sortPendingTrips() {
     let pendingTrips = this.allTrips.filter(trip => trip.status === 'pending');
     pendingTrips.forEach(trip => {
-      this.pending.push(trip);
+      if (!this.pending.includes(trip)) {
+        this.pending.push(trip);
+      }
     })
   }
 

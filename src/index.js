@@ -109,15 +109,15 @@ function estimateNewTripCost() {
 
 function sendBookingRequest() {
   const newTrip = collectBookingData();
+  allTrips.push(newTrip);
+  createUser(currentTraveler.id - 1);
+  displayUser();
   apiCalls.postNewTrip(newTrip, currentTraveler, allDestinations)
     .then(res => {
       if (!res.ok) {
         domUpdates.displayFetchErrorHandling('We\'re having trouble reaching the server, please contact your agent to book!', '.selection-err')
       }
       fetchAllInfo();
-      allTrips.push(newTrip);
-      createUser(currentTraveler.id - 1);
-      displayUser();
     });
   domUpdates.displayTripSection('upcoming');
 }
